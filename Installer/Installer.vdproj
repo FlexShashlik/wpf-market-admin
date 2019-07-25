@@ -220,7 +220,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AdminApp"
         "ProductCode" = "8:{22953CF3-5BCA-446D-8916-D63C074846D9}"
-        "PackageCode" = "8:{492B36F1-0EA6-4880-A7BE-0E7C8D662809}"
+        "PackageCode" = "8:{976342B0-DC6B-4868-9443-F9D8F7362E62}"
         "UpgradeCode" = "8:{0F80933B-DA88-4159-A694-0DA58E31399B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

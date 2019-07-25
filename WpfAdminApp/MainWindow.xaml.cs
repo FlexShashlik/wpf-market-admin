@@ -23,6 +23,8 @@ namespace WpfAdminApp
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new AppViewModel();
         }
     }
 }
