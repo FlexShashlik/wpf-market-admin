@@ -36,22 +36,26 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
 
-            <Button Command="{Binding AddCommand}">+</Button>
+            <Button Command="{Binding AddCommand}">Добавить</Button>
             <Button Command="{Binding RemoveCommand}"
-                    CommandParameter="{Binding SelectedCatalog}">-</Button>
-            <Button Command="{Binding ApplyCommand}">Применить</Button>
+                    CommandParameter="{Binding SelectedCatalog}">Удалить</Button>
+            <Button Command="{Binding ApplyCommand}"
+                    CommandParameter="{Binding SelectedCatalog}">Применить</Button>
 
         </StackPanel>
 
         <StackPanel Grid.Column="1" DataContext="{Binding SelectedCatalog}">
 
-            <TextBlock Text="Выбранный элемент"  />
+            <TextBlock Text="Выбранный элемент" />
 
             <TextBlock Text="ID" />
-            <TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox HorizontalAlignment="Left" 
+                     IsEnabled="False" 
+                     Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" />
 
             <TextBlock Text="Название" />
-            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox HorizontalAlignment="Left"
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
         </StackPanel>
 

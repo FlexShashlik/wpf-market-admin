@@ -1,13 +1,15 @@
-﻿using System.ComponentModel;
+﻿using RestSharp.Deserializers;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace WpfAdminApp
+namespace WpfAdminApp.Entities
 {
-    class Catalog : INotifyPropertyChanged
+    public class Catalog : INotifyPropertyChanged
     {
         private int _id;
         private string _name;
-        
+
+        [DeserializeAs(Name = "id")]
         public int ID
         {
             get { return _id; }
@@ -18,6 +20,7 @@ namespace WpfAdminApp
             }
         }
 
+        [DeserializeAs(Name = "name")]
         public string Name
         {
             get { return _name; }

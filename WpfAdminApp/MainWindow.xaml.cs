@@ -11,11 +11,28 @@ namespace WpfAdminApp
         public MainWindow()
         {
             InitializeComponent();
+
+            PanelButtons.IsEnabled = false;
         }
 
         private void CatalogView_Click(object sender, RoutedEventArgs e)
         {
             DataContext = new CatalogViewModel();
+        }
+
+        private void ButtonLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (MarketAPI.Login(textBoxEmail.Text, textBoxPassword.Password))
+            {
+                MessageBox.Show(MarketAPI.Token);
+
+                PanelButtons.IsEnabled = true;
+                PanelLogin.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                MessageBox.Show("Ошибка");
+            }
         }
     }
 }

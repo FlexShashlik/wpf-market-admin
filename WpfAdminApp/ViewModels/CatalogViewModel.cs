@@ -1,9 +1,8 @@
-﻿using RestSharp;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using WpfAdminApp.Entities;
 
 namespace WpfAdminApp.ViewModels
 {
@@ -26,12 +25,7 @@ namespace WpfAdminApp.ViewModels
 
         public CatalogViewModel()
         {
-            RestClient client = new RestClient("http://192.168.1.162/api/v1/");
-            RestRequest request = new RestRequest("catalog/", Method.GET);
-            
-            IRestResponse<List<Catalog>> response = client.Execute<List<Catalog>>(request);
-
-            Catalogs = new ObservableCollection<Catalog>(response.Data);
+            Catalogs = new ObservableCollection<Catalog>(MarketAPI.GetCatalog());
         }
 
         #region Commands
@@ -79,6 +73,8 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
+                                Catalog catalog = obj as Catalog;
+                                //MarketAPI(catalog?.ID);
                                 MessageBox.Show("Not Implemented");
                             }
                         )

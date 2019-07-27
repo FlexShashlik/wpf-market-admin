@@ -11,16 +11,25 @@
 
     <Window.Resources>
 
-        <DataTemplate x:Name="redViewTemplate" DataType="{x:Type viewmodels:CatalogViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:CatalogViewModel}">
             <views:CatalogView DataContext="{Binding}"/>
         </DataTemplate>
 
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="5" />
         </Style>
 
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="5" />
         </Style>
 
         <Style TargetType="Button">
@@ -38,8 +47,20 @@
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel VerticalAlignment="Center">
+        <StackPanel Name="PanelButtons" VerticalAlignment="Center">
             <Button Click="CatalogView_Click">Каталог</Button>
+        </StackPanel>
+
+        <StackPanel Name="PanelLogin" Grid.Column="2" VerticalAlignment="Center">
+
+            <TextBlock Text="Почта" HorizontalAlignment="Center" />
+            <TextBox Name="textBoxEmail"></TextBox>
+
+            <TextBlock Text="Пароль" HorizontalAlignment="Center" />
+            <PasswordBox Name="textBoxPassword"></PasswordBox>
+
+            <Button Click="ButtonLogin_Click">Войти</Button>
+
         </StackPanel>
 
         <ContentControl Grid.Column="2" Content="{Binding}"/>
