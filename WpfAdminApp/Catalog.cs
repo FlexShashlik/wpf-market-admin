@@ -7,7 +7,7 @@ namespace WpfAdminApp
     {
         private int _id;
         private string _name;
-
+        
         public int ID
         {
             get { return _id; }

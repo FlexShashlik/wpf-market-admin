@@ -3,51 +3,47 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:WpfAdminApp.ViewModels"
+        xmlns:views="clr-namespace:WpfAdminApp.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    
+        Title="MainWindow"
+        WindowStartupLocation="CenterScreen">
+
     <Window.Resources>
-        
+
+        <DataTemplate x:Name="redViewTemplate" DataType="{x:Type viewmodels:CatalogViewModel}">
+            <views:CatalogView DataContext="{Binding}"/>
+        </DataTemplate>
+
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
         </Style>
-        
+
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
         </Style>
-        
+
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
     </Window.Resources>
-    
+
     <Grid>
-        
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="0.8*" />
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox Grid.Column="0" ItemsSource="{Binding Catalogs}"
-                 SelectedItem="{Binding SelectedCatalog}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="5">
-                        <TextBlock FontSize="18" Text="{Binding Path=ID}" />
-                        <TextBlock Text="{Binding Path=Name}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
-        <StackPanel Grid.Column="1" DataContext="{Binding SelectedCatalog}">
-            
-            <TextBlock Text="Выбранный элемент"  />
-            
-            <TextBlock Text="ID" />
-            <TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" />
-            
-            <TextBlock Text="Название" />
-            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-
+        <StackPanel VerticalAlignment="Center">
+            <Button Click="CatalogView_Click">Каталог</Button>
         </StackPanel>
-        
+
+        <ContentControl Grid.Column="2" Content="{Binding}"/>
+
     </Grid>
+    
 </Window>
