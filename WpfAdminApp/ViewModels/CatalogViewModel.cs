@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -74,8 +75,18 @@ namespace WpfAdminApp.ViewModels
                             obj =>
                             {
                                 Catalog catalog = obj as Catalog;
-                                //MarketAPI(catalog?.ID);
-                                MessageBox.Show("Not Implemented");
+                                bool response = MarketAPI.UpdateCatalog(catalog);
+
+                                Catalogs.Clear();
+                                List<Catalog> catalogs = MarketAPI.GetCatalog();
+
+                                catalogs.ForEach(x => Catalogs.Add(x));
+
+                                MessageBox.Show
+                                (
+                                    response ?
+                                    MarketAPI.SuccessMessage : MarketAPI.FailMessage
+                                );
                             }
                         )
                     );

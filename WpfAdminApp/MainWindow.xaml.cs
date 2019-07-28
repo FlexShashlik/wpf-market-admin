@@ -24,8 +24,6 @@ namespace WpfAdminApp
         {
             if (MarketAPI.Login(textBoxEmail.Text, textBoxPassword.Password))
             {
-                MessageBox.Show(MarketAPI.Token);
-
                 PanelButtons.IsEnabled = true;
                 PanelLogin.Visibility = Visibility.Hidden;
             }

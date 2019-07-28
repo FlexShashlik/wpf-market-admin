@@ -8,7 +8,11 @@ namespace WpfAdminApp
     {
         public static string Token { get; set; }
         private static RestClient _client = new RestClient("http://192.168.1.162/api/v1/");
-        
+
+
+        public const string SuccessMessage = "Операция завершена удачно";
+        public const string FailMessage = "Что-то пошло не так...";
+
 
         public static bool Login(string email, string password)
         {
@@ -31,6 +35,19 @@ namespace WpfAdminApp
             RestRequest request = new RestRequest("catalog/", Method.GET);
 
             return _client.Execute<List<Catalog>>(request).Data;
+        }
+
+        public static bool UpdateCatalog(Catalog catalog)
+        {
+            RestRequest request = new RestRequest("admin/catalog/{id}", Method.PUT);
+            request.AddUrlSegment("id", catalog.ID);
+            request.AddJsonBody(new { catalog.Name });
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            IRestResponse response = _client.Execute(request);
+            
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
     }
 }

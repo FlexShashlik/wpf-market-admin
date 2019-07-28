@@ -21,7 +21,7 @@
             Name="listBoxCatalogs"
             Grid.Column="0" 
             ItemsSource="{Binding Catalogs}" 
-            SelectedItem="{Binding SelectedCatalog, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            SelectedItem="{Binding SelectedCatalog}">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
