@@ -37,6 +37,18 @@ namespace WpfAdminApp
             return _client.Execute<List<Catalog>>(request).Data;
         }
 
+        public static bool AddCatalog(Catalog catalog)
+        {
+            RestRequest request = new RestRequest("admin/catalog/", Method.POST);
+            request.AddJsonBody(new { catalog.Name });
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            IRestResponse response = _client.Execute(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.Created;
+        }
+
         public static bool UpdateCatalog(Catalog catalog)
         {
             RestRequest request = new RestRequest("admin/catalog/{id}", Method.PUT);

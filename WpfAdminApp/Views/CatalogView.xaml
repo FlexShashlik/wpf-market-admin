@@ -36,7 +36,8 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
 
-            <Button Command="{Binding AddCommand}">Добавить</Button>
+            <Button Command="{Binding AddCommand}"
+                    CommandParameter="{Binding Text, ElementName=textBoxName}">Добавить</Button>
             <Button Command="{Binding RemoveCommand}"
                     CommandParameter="{Binding SelectedCatalog}">Удалить</Button>
             <Button Command="{Binding ApplyCommand}"
@@ -46,15 +47,15 @@
 
         <StackPanel Grid.Column="1" DataContext="{Binding SelectedCatalog}">
 
-            <TextBlock Text="Выбранный элемент" />
-
             <TextBlock Text="ID" />
-            <TextBox HorizontalAlignment="Left" 
+            <TextBox Name="textBoxID"
+                     HorizontalAlignment="Left" 
                      IsEnabled="False" 
                      Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" />
 
             <TextBlock Text="Название" />
-            <TextBox HorizontalAlignment="Left"
+            <TextBox Name="textBoxName"
+                     HorizontalAlignment="Left"
                      Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
         </StackPanel>

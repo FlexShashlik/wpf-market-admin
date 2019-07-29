@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -20,6 +21,7 @@ namespace WpfAdminApp.ViewModels
             set
             {
                 _selectedCatalog = value;
+                
                 OnPropertyChanged("SelectedCatalog");
             }
         }
@@ -40,7 +42,13 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                                 {
-                                    Catalogs.Add(new Catalog());
+                                    string catalogName = obj as string;
+
+                                    if (catalogName != string.Empty)
+                                    {
+                                        Catalog catalog = new Catalog() { Name = catalogName };
+                                        ExecuteCommand(MarketAPI.AddCatalog, catalog);
+                                    }
                                 }
                         )
                     );
@@ -74,19 +82,7 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                Catalog catalog = obj as Catalog;
-                                bool response = MarketAPI.UpdateCatalog(catalog);
-
-                                Catalogs.Clear();
-                                List<Catalog> catalogs = MarketAPI.GetCatalog();
-
-                                catalogs.ForEach(x => Catalogs.Add(x));
-
-                                MessageBox.Show
-                                (
-                                    response ?
-                                    MarketAPI.SuccessMessage : MarketAPI.FailMessage
-                                );
+                                ExecuteCommand(MarketAPI.UpdateCatalog, obj);
                             }
                         )
                     );
@@ -94,6 +90,24 @@ namespace WpfAdminApp.ViewModels
         }
 
         #endregion
+
+        private void ExecuteCommand(Func<Catalog, bool> apiMethod, object obj)
+        {
+            if (obj != null)
+            {
+                Catalog catalog = obj as Catalog;
+                bool response = apiMethod(catalog);
+
+                Catalogs.Clear();
+                MarketAPI.GetCatalog().ForEach(x => Catalogs.Add(x));
+
+                MessageBox.Show
+                (
+                    response ?
+                    MarketAPI.SuccessMessage : MarketAPI.FailMessage
+                );
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
