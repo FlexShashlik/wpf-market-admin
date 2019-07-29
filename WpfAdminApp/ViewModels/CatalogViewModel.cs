@@ -21,7 +21,6 @@ namespace WpfAdminApp.ViewModels
             set
             {
                 _selectedCatalog = value;
-                
                 OnPropertyChanged("SelectedCatalog");
             }
         }
@@ -64,8 +63,7 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                                 {
-                                    Catalog catalog = obj as Catalog;
-                                    Catalogs?.Remove(catalog);
+                                    ExecuteCommand(MarketAPI.DeleteCatalog, obj);
                                 },
                             obj => Catalogs.Count > 0
                         )

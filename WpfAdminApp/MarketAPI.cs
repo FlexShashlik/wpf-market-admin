@@ -61,5 +61,17 @@ namespace WpfAdminApp
             
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
+
+        public static bool DeleteCatalog(Catalog catalog)
+        {
+            RestRequest request = new RestRequest("admin/catalog/{id}", Method.DELETE);
+            request.AddUrlSegment("id", catalog.ID);
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            IRestResponse response = _client.Execute(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
     }
 }
