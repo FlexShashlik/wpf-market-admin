@@ -75,5 +75,14 @@ namespace WpfAdminApp
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
         #endregion
+
+        #region Product
+        public static List<Product> GetProducts()
+        {
+            RestRequest request = new RestRequest("products/", Method.GET);
+
+            return _client.Execute<List<Product>>(request).Data;
+        }
+        #endregion
     }
 }
