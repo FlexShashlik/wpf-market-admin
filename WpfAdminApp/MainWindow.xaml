@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WpfAdminApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:WpfAdminApp.ViewModels"
         xmlns:views="clr-namespace:WpfAdminApp.Views"
@@ -11,8 +11,12 @@
 
     <Window.Resources>
 
-        <DataTemplate DataType="{x:Type viewmodels:CatalogViewModel}">
+        <DataTemplate x:Name="CatalogViewTemplate" DataType="{x:Type viewmodels:CatalogViewModel}">
             <views:CatalogView DataContext="{Binding}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Name="ProductsViewTemplate" DataType="{x:Type viewmodels:ProductsViewModel}">
+            <views:ProductsView DataContext="{Binding}"/>
         </DataTemplate>
 
         <Style TargetType="TextBlock">
@@ -49,6 +53,7 @@
 
         <StackPanel Name="PanelButtons" VerticalAlignment="Center">
             <Button Click="CatalogView_Click">Каталог</Button>
+            <Button Click="ProductsView_Click">Продукты</Button>
         </StackPanel>
 
         <StackPanel Name="PanelLogin" Grid.Column="2" VerticalAlignment="Center">

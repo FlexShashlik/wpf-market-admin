@@ -30,6 +30,7 @@ namespace WpfAdminApp
             return false;
         }
 
+        #region Catalog
         public static List<Catalog> GetCatalog()
         {
             RestRequest request = new RestRequest("catalog/", Method.GET);
@@ -73,5 +74,6 @@ namespace WpfAdminApp
 
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
+        #endregion
     }
 }

@@ -7,26 +7,26 @@ using WpfAdminApp.Entities;
 
 namespace WpfAdminApp.ViewModels
 {
-    public class CatalogViewModel
+    public class ProductsViewModel
     {
-        private Catalog _selectedCatalog;
+        private Product _selectedProduct;
         private RelayCommand _addCommand, _removeCommand, _applyCommand;
 
-        public ObservableCollection<Catalog> Catalogs { get; set; }
+        public ObservableCollection<Product> Products { get; set; }
 
-        public Catalog SelectedCatalog
+        public Product SelectedProduct
         {
-            get { return _selectedCatalog; }
+            get { return _selectedProduct; }
             set
             {
-                _selectedCatalog = value;
-                OnPropertyChanged("SelectedCatalog");
+                _selectedProduct = value;
+                OnPropertyChanged("SelectedProduct");
             }
         }
 
-        public CatalogViewModel()
+        public ProductsViewModel()
         {
-            Catalogs = new ObservableCollection<Catalog>(MarketAPI.GetCatalog());
+            Products = new ObservableCollection<Product>(MarketAPI.GetProducts());
         }
 
         #region Commands
@@ -40,13 +40,15 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                string catalogName = obj as string;
+                                var values = (object[])obj;
+                                MessageBox.Show(values[0].ToString());
+                                /*string catalogName = obj as string;
 
                                 if (catalogName != string.Empty)
                                 {
                                     Catalog catalog = new Catalog() { Name = catalogName };
                                     ExecuteCommand(MarketAPI.AddCatalog, catalog);
-                                }
+                                }*/
                             }
                         )
                     );
@@ -61,10 +63,10 @@ namespace WpfAdminApp.ViewModels
                     (_removeCommand = new RelayCommand
                         (
                             obj =>
-                                {
-                                    ExecuteCommand(MarketAPI.DeleteCatalog, obj);
-                                },
-                            obj => Catalogs.Count > 0
+                            {
+                                //ExecuteCommand(MarketAPI.DeleteProduct, obj);
+                            },
+                            obj => Products.Count > 0
                         )
                     );
             }
@@ -79,7 +81,7 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                ExecuteCommand(MarketAPI.UpdateCatalog, obj);
+                                //ExecuteCommand(MarketAPI.UpdateProduct, obj);
                             }
                         )
                     );
@@ -88,15 +90,15 @@ namespace WpfAdminApp.ViewModels
 
         #endregion
 
-        private void ExecuteCommand(Func<Catalog, bool> apiMethod, object obj)
+        private void ExecuteCommand(Func<Product, bool> apiMethod, object obj)
         {
             if (obj != null)
             {
-                Catalog catalog = obj as Catalog;
-                bool response = apiMethod(catalog);
+                Product product = obj as Product;
+                bool response = apiMethod(product);
 
-                Catalogs.Clear();
-                MarketAPI.GetCatalog().ForEach(x => Catalogs.Add(x));
+                Products.Clear();
+                MarketAPI.GetProducts().ForEach(x => Products.Add(x));
 
                 MessageBox.Show
                 (

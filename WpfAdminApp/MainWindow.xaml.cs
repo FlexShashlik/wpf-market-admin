@@ -15,11 +15,6 @@ namespace WpfAdminApp
             PanelButtons.IsEnabled = false;
         }
 
-        private void CatalogView_Click(object sender, RoutedEventArgs e)
-        {
-            DataContext = new CatalogViewModel();
-        }
-
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
             if (MarketAPI.Login(textBoxEmail.Text, textBoxPassword.Password))
@@ -31,6 +26,16 @@ namespace WpfAdminApp
             {
                 MessageBox.Show("Ошибка");
             }
+        }
+
+        private void CatalogView_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new CatalogViewModel();
+        }
+
+        private void ProductsView_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new ProductsViewModel();
         }
     }
 }
