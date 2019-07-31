@@ -72,8 +72,6 @@ namespace WpfAdminApp.Entities
             get { return $"{MarketAPI.SERVER}images/{_id}.{_imageExtension}"; }
         }
 
-        public string LocalImagePath { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {

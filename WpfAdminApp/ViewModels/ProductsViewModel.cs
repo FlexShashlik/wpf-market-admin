@@ -2,10 +2,8 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using WpfAdminApp.Entities;
 
 namespace WpfAdminApp.ViewModels
@@ -14,7 +12,8 @@ namespace WpfAdminApp.ViewModels
     {
         private Product _selectedProduct;
         private RelayCommand _addCommand, _removeCommand, _applyCommand, _chooseImageCommand;
-        private string _localImageLocation, _localImageExtension;
+
+        public static string LocalImagePath { get; set; }
 
         public ObservableCollection<Product> Products { get; set; }
 
@@ -23,6 +22,7 @@ namespace WpfAdminApp.ViewModels
             get { return _selectedProduct; }
             set
             {
+                LocalImagePath = null;
                 _selectedProduct = value;
                 OnPropertyChanged("SelectedProduct");
             }
@@ -44,7 +44,7 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                if (_localImageLocation == null)
+                                if (LocalImagePath == null)
                                 {
                                     MessageBox.Show(MarketAPI.PictureAbsence);
                                     return;
@@ -66,8 +66,7 @@ namespace WpfAdminApp.ViewModels
                                         Name = productName,
                                         Price = int.Parse(productPrice),
                                         ImageExtension = productImgExt,
-                                        SubCatalogID = int.Parse(productSubCatalogID),
-                                        LocalImagePath = _localImageLocation,
+                                        SubCatalogID = int.Parse(productSubCatalogID)
                                     };
 
                                     ExecuteCommand(MarketAPI.AddProduct, product);
@@ -120,15 +119,16 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                OpenFileDialog openFileDialog = new OpenFileDialog();
-                                openFileDialog.Filter =
-                                "Картинки (*.png;*.jpeg;*.jpg;*.gif)" +
-                                "|*.png;*.jpeg;*.jpg;*.gif" +
-                                "|Все файлы (*.*)|*.*";
-                                
+                                OpenFileDialog openFileDialog = new OpenFileDialog
+                                {
+                                    Filter = "Картинки (*.png;*.jpeg;*.jpg;*.gif)" +
+                                             "|*.png;*.jpeg;*.jpg;*.gif" +
+                                             "|Все файлы (*.*)|*.*"
+                                };
+
                                 if (openFileDialog.ShowDialog() == true)
                                 {
-                                    _localImageLocation = openFileDialog.FileName;
+                                    LocalImagePath = openFileDialog.FileName;
                                     MessageBox.Show("Картинка успешно выбрана!");
                                 }
                             }

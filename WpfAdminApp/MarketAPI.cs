@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using System.Collections.Generic;
 using WpfAdminApp.Entities;
+using WpfAdminApp.ViewModels;
 
 namespace WpfAdminApp
 {
@@ -98,7 +99,7 @@ namespace WpfAdminApp
             request.AddParameter("image_extension", product.ImageExtension);
             request.AddParameter("sub_catalog_id", product.SubCatalogID);
 
-            request.AddFile("image", product.LocalImagePath);
+            request.AddFile("image", ProductsViewModel.LocalImagePath);
 
             request.AddHeader("Authorization", "Bearer " + Token);
 
@@ -117,8 +118,8 @@ namespace WpfAdminApp
             request.AddParameter("image_extension", product.ImageExtension);
             request.AddParameter("sub_catalog_id", product.SubCatalogID);
 
-            if (product.LocalImagePath != null)
-                request.AddFile("image", product.LocalImagePath);
+            if (ProductsViewModel.LocalImagePath != null)
+                request.AddFile("image", ProductsViewModel.LocalImagePath, "multipart/form-data");
 
             request.AddHeader("Authorization", "Bearer " + Token);
 
