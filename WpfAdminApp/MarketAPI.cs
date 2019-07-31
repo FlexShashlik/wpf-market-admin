@@ -32,6 +32,7 @@ namespace WpfAdminApp
         }
 
         #region Catalog
+
         public static List<Catalog> GetCatalog()
         {
             RestRequest request = new RestRequest("catalog/", Method.GET);
@@ -75,15 +76,56 @@ namespace WpfAdminApp
 
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
+
         #endregion
 
         #region Product
+
         public static List<Product> GetProducts()
         {
             RestRequest request = new RestRequest("products/", Method.GET);
 
             return _client.Execute<List<Product>>(request).Data;
         }
+
+        public static bool AddProduct(Product product)
+        {
+            RestRequest request = new RestRequest("admin/products/", Method.POST);
+
+            request.AddParameter("name", product.Name);
+            request.AddParameter("price", product.Price);
+            request.AddParameter("image_extension", product.ImageExtension);
+            request.AddParameter("sub_catalog_id", product.SubCatalogID);
+
+            request.AddFile("image", product.LocalImagePath);
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            IRestResponse response = _client.Execute(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.Created;
+        }
+
+        public static bool UpdateProduct(Product product)
+        {
+            RestRequest request = new RestRequest("admin/products/{id}", Method.PUT);
+            request.AddUrlSegment("id", product.ID);
+
+            request.AddParameter("name", product.Name);
+            request.AddParameter("price", product.Price);
+            request.AddParameter("image_extension", product.ImageExtension);
+            request.AddParameter("sub_catalog_id", product.SubCatalogID);
+
+            if (product.LocalImagePath != null)
+                request.AddFile("image", product.LocalImagePath);
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            IRestResponse response = _client.Execute(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
         #endregion
     }
 }

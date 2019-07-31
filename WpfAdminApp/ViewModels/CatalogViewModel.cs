@@ -53,6 +53,22 @@ namespace WpfAdminApp.ViewModels
             }
         }
 
+        public RelayCommand ApplyCommand
+        {
+            get
+            {
+                return _applyCommand ??
+                    (_applyCommand = new RelayCommand
+                        (
+                            obj =>
+                            {
+                                ExecuteCommand(MarketAPI.UpdateCatalog, obj);
+                            }
+                        )
+                    );
+            }
+        }
+
         public RelayCommand RemoveCommand
         {
             get
@@ -65,22 +81,6 @@ namespace WpfAdminApp.ViewModels
                                     ExecuteCommand(MarketAPI.DeleteCatalog, obj);
                                 },
                             obj => Catalogs.Count > 0
-                        )
-                    );
-            }
-        }
-
-        public RelayCommand ApplyCommand
-        {
-            get
-            {
-                return _applyCommand ??
-                    (_applyCommand = new RelayCommand
-                        (
-                            obj =>
-                            {
-                                ExecuteCommand(MarketAPI.UpdateCatalog, obj);
-                            }
                         )
                     );
             }

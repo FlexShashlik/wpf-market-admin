@@ -83,10 +83,14 @@
                 </Button.CommandParameter>
 
             </Button>
+            
             <Button Command="{Binding RemoveCommand}"
                     CommandParameter="{Binding SelectedProduct}">Удалить</Button>
+            
             <Button Command="{Binding ApplyCommand}"
                     CommandParameter="{Binding SelectedProduct}">Применить</Button>
+
+            <Button Command="{Binding ChooseImageCommand}">Картинка</Button>
 
         </StackPanel>
 

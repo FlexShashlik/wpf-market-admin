@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -10,7 +11,8 @@ namespace WpfAdminApp.ViewModels
     public class ProductsViewModel
     {
         private Product _selectedProduct;
-        private RelayCommand _addCommand, _removeCommand, _applyCommand;
+        private RelayCommand _addCommand, _removeCommand, _applyCommand, _chooseImageCommand;
+        private string _localImageLocation;
 
         public ObservableCollection<Product> Products { get; set; }
 
@@ -49,17 +51,36 @@ namespace WpfAdminApp.ViewModels
                                 if (productName != string.Empty &&
                                     productPrice != string.Empty &&
                                     productImgExt != string.Empty &&
-                                    productSubCatalogID != string.Empty)
+                                    productSubCatalogID != string.Empty &&
+                                    _localImageLocation != string.Empty)
                                 {
                                     Product product = new Product()
                                     {
                                         Name = productName,
                                         Price = int.Parse(productPrice),
                                         ImageExtension = productImgExt,
-                                        SubCatalogID = int.Parse(productSubCatalogID)
+                                        SubCatalogID = int.Parse(productSubCatalogID),
+                                        LocalImagePath = _localImageLocation,
                                     };
-                                    //ExecuteCommand(MarketAPI.AddProduct, product);
+
+                                    ExecuteCommand(MarketAPI.AddProduct, product);
                                 }
+                            }
+                        )
+                    );
+            }
+        }
+
+        public RelayCommand ApplyCommand
+        {
+            get
+            {
+                return _applyCommand ??
+                    (_applyCommand = new RelayCommand
+                        (
+                            obj =>
+                            {
+                                ExecuteCommand(MarketAPI.UpdateProduct, obj);
                             }
                         )
                     );
@@ -83,16 +104,23 @@ namespace WpfAdminApp.ViewModels
             }
         }
 
-        public RelayCommand ApplyCommand
+        public RelayCommand ChooseImageCommand
         {
             get
             {
-                return _applyCommand ??
-                    (_applyCommand = new RelayCommand
+                return _chooseImageCommand ??
+                    (_chooseImageCommand = new RelayCommand
                         (
                             obj =>
                             {
-                                //ExecuteCommand(MarketAPI.UpdateProduct, obj);
+                                OpenFileDialog openFileDialog = new OpenFileDialog();
+                                openFileDialog.Filter =
+                                "Картинки (*.png;*.jpeg;*.jpg;*.gif)" +
+                                "|*.png;*.jpeg;*.jpg;*.gif" +
+                                "|Все файлы (*.*)|*.*";
+
+                                if (openFileDialog.ShowDialog() == true)
+                                    _localImageLocation = openFileDialog.FileName;
                             }
                         )
                     );
