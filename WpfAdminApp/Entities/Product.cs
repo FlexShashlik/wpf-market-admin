@@ -1,6 +1,10 @@
 ﻿using RestSharp.Deserializers;
 using System.ComponentModel;
+using System.IO;
+using System.Net;
 using System.Runtime.CompilerServices;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace WpfAdminApp.Entities
 {
@@ -67,9 +71,22 @@ namespace WpfAdminApp.Entities
             }
         }
 
-        public string ImagePath
+        public ImageSource Image
         {
-            get { return $"{MarketAPI.SERVER}images/{_id}.{_imageExtension}"; }
+            get
+            {
+                WebClient wc = new WebClient();
+                byte[] bytes = wc.DownloadData($"{MarketAPI.SERVER}images/{_id}.{_imageExtension}");
+
+                BitmapImage image = new BitmapImage();
+
+                image.BeginInit();
+                image.StreamSource = new MemoryStream(bytes);
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.EndInit();
+
+                return image;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

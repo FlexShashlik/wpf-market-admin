@@ -121,8 +121,7 @@
 
             <TextBlock Text="Картинка"/>
             <Image Name="imageProduct"
-                   Source="{Binding ImagePath}"
-                   RenderOptions.CacheInvalidationThresholdMaximum="0"/>
+                   Source="{Binding Image}"/>
             
         </StackPanel>
 
