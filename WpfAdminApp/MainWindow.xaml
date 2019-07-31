@@ -9,11 +9,11 @@
     <Window.Resources>
 
         <DataTemplate x:Name="CatalogViewTemplate" DataType="{x:Type viewmodels:CatalogViewModel}">
-            <views:CatalogView DataContext="{Binding}"/>
+            <views:CatalogView DataContext="{Binding}" />
         </DataTemplate>
 
         <DataTemplate x:Name="ProductsViewTemplate" DataType="{x:Type viewmodels:ProductsViewModel}">
-            <views:ProductsView DataContext="{Binding}"/>
+            <views:ProductsView DataContext="{Binding}" />
         </DataTemplate>
 
         <Style TargetType="TextBlock">
@@ -23,13 +23,13 @@
 
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
-            <Setter Property="Width" Value="200"/>
+            <Setter Property="Width" Value="200" />
             <Setter Property="Margin" Value="5" />
         </Style>
 
         <Style TargetType="PasswordBox">
             <Setter Property="FontSize" Value="14" />
-            <Setter Property="Width" Value="200"/>
+            <Setter Property="Width" Value="200" />
             <Setter Property="Margin" Value="5" />
         </Style>
 
@@ -37,6 +37,11 @@
             <Setter Property="Width" Value="80" />
             <Setter Property="Height" Value="30" />
             <Setter Property="Margin" Value="5" />
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
         </Style>
 
     </Window.Resources>

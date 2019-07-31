@@ -12,19 +12,19 @@
 
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="14" />
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Width" Value="200"/>
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Width" Value="200" />
             <Setter Property="Margin" Value="5" />
         </Style>
 
         <Style TargetType="Image">
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Stretch" Value="Fill"/>
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Stretch" Value="Fill" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Margin" Value="5" />
         </Style>
 
-        <c:Converter x:Key="Converter"/>
+        <c:Converter x:Key="Converter" />
 
     </UserControl.Resources>
     
@@ -40,27 +40,26 @@
             <RowDefinition Height="0.2*" />
         </Grid.RowDefinitions>
 
-        <DataGrid AutoGenerateColumns="False"
-                  ItemsSource="{Binding Products}"
+        <DataGrid ItemsSource="{Binding Products}"
                   SelectedItem="{Binding SelectedProduct}"
                   ColumnWidth="*">
 
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="ID" 
-                                    Binding="{Binding ID}"/>
+                                    Binding="{Binding ID}" />
                 
                 <DataGridTextColumn Header="Название" 
-                                    Binding="{Binding Name}"/>
+                                    Binding="{Binding Name}" />
                 
                 <DataGridTextColumn Header="Цена" 
-                                    Binding="{Binding Price}"/>
+                                    Binding="{Binding Price}" />
                 
                 <DataGridTextColumn Header="Расширение картинки" 
-                                    Binding="{Binding ImageExtension}"/>
+                                    Binding="{Binding ImageExtension}" />
                 
                 <DataGridTextColumn Header="ID под-каталога" 
-                                    Binding="{Binding SubCatalogID}"/>
+                                    Binding="{Binding SubCatalogID}" />
 
             </DataGrid.Columns>
 
@@ -74,10 +73,10 @@
                 <Button.CommandParameter>
 
                     <MultiBinding Converter="{StaticResource Converter}" ConverterParameter="">
-                        <Binding Path="Text" ElementName="textBoxName"/>
-                        <Binding Path="Text" ElementName="textBoxPrice"/>
-                        <Binding Path="Text" ElementName="textBoxImageExtension"/>
-                        <Binding Path="Text" ElementName="textBoxSubCatalogID"/>
+                        <Binding Path="Text" ElementName="textBoxName" />
+                        <Binding Path="Text" ElementName="textBoxPrice" />
+                        <Binding Path="Text" ElementName="textBoxImageExtension" />
+                        <Binding Path="Text" ElementName="textBoxSubCatalogID" />
                     </MultiBinding>
                     
                 </Button.CommandParameter>
@@ -119,9 +118,9 @@
             <TextBox Name="textBoxSubCatalogID"
                      Text="{Binding SubCatalogID, UpdateSourceTrigger=PropertyChanged}" />
 
-            <TextBlock Text="Картинка"/>
+            <TextBlock Text="Картинка" />
             <Image Name="imageProduct"
-                   Source="{Binding Image}"/>
+                   Source="{Binding Image}" />
             
         </StackPanel>
 
