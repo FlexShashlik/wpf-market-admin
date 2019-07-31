@@ -7,7 +7,8 @@ namespace WpfAdminApp
     public static class MarketAPI
     {
         public static string Token { get; set; }
-        private static RestClient _client = new RestClient("http://192.168.1.162/api/v1/");
+        public const string SERVER = "http://192.168.1.162/";
+        private static RestClient _client = new RestClient(SERVER + "api/v1/");
 
 
         public const string SuccessMessage = "Операция завершена удачно";

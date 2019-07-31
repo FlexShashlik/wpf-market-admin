@@ -41,14 +41,25 @@ namespace WpfAdminApp.ViewModels
                             obj =>
                             {
                                 var values = (object[])obj;
-                                MessageBox.Show(values[0].ToString());
-                                /*string catalogName = obj as string;
+                                string productName = values[0].ToString();
+                                string productPrice = values[1].ToString();
+                                string productImgExt = values[2].ToString();
+                                string productSubCatalogID = values[3].ToString();
 
-                                if (catalogName != string.Empty)
+                                if (productName != string.Empty &&
+                                    productPrice != string.Empty &&
+                                    productImgExt != string.Empty &&
+                                    productSubCatalogID != string.Empty)
                                 {
-                                    Catalog catalog = new Catalog() { Name = catalogName };
-                                    ExecuteCommand(MarketAPI.AddCatalog, catalog);
-                                }*/
+                                    Product product = new Product()
+                                    {
+                                        Name = productName,
+                                        Price = int.Parse(productPrice),
+                                        ImageExtension = productImgExt,
+                                        SubCatalogID = int.Parse(productSubCatalogID)
+                                    };
+                                    //ExecuteCommand(MarketAPI.AddProduct, product);
+                                }
                             }
                         )
                     );

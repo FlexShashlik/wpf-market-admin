@@ -59,7 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MyConverter.cs" />
+    <Compile Include="Converter.cs" />
     <Compile Include="Entities\LoginResponse.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="MarketAPI.cs" />

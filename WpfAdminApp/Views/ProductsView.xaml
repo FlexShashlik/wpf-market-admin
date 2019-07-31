@@ -17,7 +17,14 @@
             <Setter Property="Margin" Value="5" />
         </Style>
 
-        <c:MyConverter x:Key="MyConverter"/>
+        <Style TargetType="Image">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Stretch" Value="Fill"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <c:Converter x:Key="Converter"/>
 
     </UserControl.Resources>
     
@@ -66,8 +73,11 @@
 
                 <Button.CommandParameter>
 
-                    <MultiBinding Converter="{StaticResource MyConverter}" ConverterParameter="">
+                    <MultiBinding Converter="{StaticResource Converter}" ConverterParameter="">
                         <Binding Path="Text" ElementName="textBoxName"/>
+                        <Binding Path="Text" ElementName="textBoxPrice"/>
+                        <Binding Path="Text" ElementName="textBoxImageExtension"/>
+                        <Binding Path="Text" ElementName="textBoxSubCatalogID"/>
                     </MultiBinding>
                     
                 </Button.CommandParameter>
@@ -102,6 +112,10 @@
             <TextBlock Text="ID под-каталога" />
             <TextBox Name="textBoxSubCatalogID"
                      Text="{Binding SubCatalogID, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Картинка"/>
+            <Image Name="imageProduct"
+                   Source="{Binding ImagePath}" />
 
         </StackPanel>
 

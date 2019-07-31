@@ -9,8 +9,8 @@ namespace WpfAdminApp.Entities
         private int _id;
         private string _name;
         private int _price;
-        private string _image_extension;
-        private int _sub_catalog_id;
+        private string _imageExtension;
+        private int _subCatalogID;
 
         [DeserializeAs(Name = "id")]
         public int ID
@@ -48,10 +48,10 @@ namespace WpfAdminApp.Entities
         [DeserializeAs(Name = "image_extension")]
         public string ImageExtension
         {
-            get { return _image_extension; }
+            get { return _imageExtension; }
             set
             {
-                _image_extension = value;
+                _imageExtension = value;
                 OnPropertyChanged("ImageExtension");
             }
         }
@@ -59,12 +59,17 @@ namespace WpfAdminApp.Entities
         [DeserializeAs(Name = "sub_catalog_id")]
         public int SubCatalogID
         {
-            get { return _sub_catalog_id; }
+            get { return _subCatalogID; }
             set
             {
-                _sub_catalog_id = value;
+                _subCatalogID = value;
                 OnPropertyChanged("SubCatalogID");
             }
+        }
+
+        public string ImagePath
+        {
+            get { return $"{MarketAPI.SERVER}images/{_id}.{_imageExtension}"; }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

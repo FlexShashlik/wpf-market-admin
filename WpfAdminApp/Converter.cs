@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using WpfAdminApp.Entities;
 
 namespace WpfAdminApp
 {
-    public class MyConverter : IMultiValueConverter
+    public class Converter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
