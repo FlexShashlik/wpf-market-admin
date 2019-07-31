@@ -2,8 +2,10 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using WpfAdminApp.Entities;
 
 namespace WpfAdminApp.ViewModels
@@ -12,7 +14,7 @@ namespace WpfAdminApp.ViewModels
     {
         private Product _selectedProduct;
         private RelayCommand _addCommand, _removeCommand, _applyCommand, _chooseImageCommand;
-        private string _localImageLocation;
+        private string _localImageLocation, _localImageExtension;
 
         public ObservableCollection<Product> Products { get; set; }
 
@@ -42,6 +44,12 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
+                                if (_localImageLocation == null)
+                                {
+                                    MessageBox.Show(MarketAPI.PictureAbsence);
+                                    return;
+                                }
+
                                 var values = (object[])obj;
                                 string productName = values[0].ToString();
                                 string productPrice = values[1].ToString();
@@ -51,8 +59,7 @@ namespace WpfAdminApp.ViewModels
                                 if (productName != string.Empty &&
                                     productPrice != string.Empty &&
                                     productImgExt != string.Empty &&
-                                    productSubCatalogID != string.Empty &&
-                                    _localImageLocation != string.Empty)
+                                    productSubCatalogID != string.Empty)
                                 {
                                     Product product = new Product()
                                     {
@@ -96,7 +103,7 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                //ExecuteCommand(MarketAPI.DeleteProduct, obj);
+                                ExecuteCommand(MarketAPI.DeleteProduct, obj);
                             },
                             obj => Products.Count > 0
                         )
@@ -118,9 +125,12 @@ namespace WpfAdminApp.ViewModels
                                 "Картинки (*.png;*.jpeg;*.jpg;*.gif)" +
                                 "|*.png;*.jpeg;*.jpg;*.gif" +
                                 "|Все файлы (*.*)|*.*";
-
+                                
                                 if (openFileDialog.ShowDialog() == true)
+                                {
                                     _localImageLocation = openFileDialog.FileName;
+                                    MessageBox.Show("Картинка успешно выбрана!");
+                                }
                             }
                         )
                     );

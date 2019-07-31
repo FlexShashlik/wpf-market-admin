@@ -90,7 +90,9 @@
             <Button Command="{Binding ApplyCommand}"
                     CommandParameter="{Binding SelectedProduct}">Применить</Button>
 
-            <Button Command="{Binding ChooseImageCommand}">Картинка</Button>
+            <Button Command="{Binding ChooseImageCommand}"
+                    CommandParameter="{Binding SelectedProduct}"
+                    Width="110">Выбрать картинку</Button>
 
         </StackPanel>
 

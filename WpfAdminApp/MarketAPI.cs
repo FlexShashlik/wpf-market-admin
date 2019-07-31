@@ -13,6 +13,7 @@ namespace WpfAdminApp
 
         public const string SuccessMessage = "Операция завершена удачно";
         public const string FailMessage = "Что-то пошло не так...";
+        public const string PictureAbsence = "Картинка не выбрана!";
 
 
         public static bool Login(string email, string password)
@@ -118,6 +119,18 @@ namespace WpfAdminApp
 
             if (product.LocalImagePath != null)
                 request.AddFile("image", product.LocalImagePath);
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            IRestResponse response = _client.Execute(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
+        public static bool DeleteProduct(Product product)
+        {
+            RestRequest request = new RestRequest("admin/products/{id}", Method.DELETE);
+            request.AddUrlSegment("id", product.ID);
 
             request.AddHeader("Authorization", "Bearer " + Token);
 
