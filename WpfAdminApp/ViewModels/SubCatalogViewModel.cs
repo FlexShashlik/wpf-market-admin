@@ -87,7 +87,7 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                // TODO: ExecuteCommand(MarketAPI.DeleteSubCatalog, obj);
+                                ExecuteCommand(MarketAPI.DeleteSubCatalog, obj);
                             },
                             obj => SubCatalogs.Count > 0
                         )

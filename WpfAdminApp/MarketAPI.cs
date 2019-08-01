@@ -119,6 +119,18 @@ namespace WpfAdminApp
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
+        public static bool DeleteSubCatalog(SubCatalog subCatalog)
+        {
+            RestRequest request = new RestRequest("admin/sub_catalog/{id}", Method.DELETE);
+            request.AddUrlSegment("id", subCatalog.ID);
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            IRestResponse response = _client.Execute(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
         #endregion
 
         #region Product
