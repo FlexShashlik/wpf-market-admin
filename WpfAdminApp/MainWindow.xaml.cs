@@ -33,6 +33,11 @@ namespace WpfAdminApp
             DataContext = new CatalogViewModel();
         }
 
+        private void SubCatalogView_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new SubCatalogViewModel();
+        }
+
         private void ProductsView_Click(object sender, RoutedEventArgs e)
         {
             DataContext = new ProductsViewModel();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -7,26 +8,26 @@ using WpfAdminApp.Entities;
 
 namespace WpfAdminApp.ViewModels
 {
-    public class CatalogViewModel : INotifyPropertyChanged
+    public class SubCatalogViewModel : INotifyPropertyChanged
     {
-        private Catalog _selectedCatalog;
+        private SubCatalog _selectedSubCatalog;
         private RelayCommand _addCommand, _removeCommand, _applyCommand;
+        
+        public ObservableCollection<SubCatalog> SubCatalogs { get; set; }
 
-        public ObservableCollection<Catalog> Catalogs { get; set; }
-
-        public Catalog SelectedCatalog
+        public SubCatalog SelectedSubCatalog
         {
-            get { return _selectedCatalog; }
+            get { return _selectedSubCatalog; }
             set
             {
-                _selectedCatalog = value;
-                OnPropertyChanged("SelectedCatalog");
+                _selectedSubCatalog = value;
+                OnPropertyChanged("SelectedSubCatalog");
             }
         }
 
-        public CatalogViewModel()
+        public SubCatalogViewModel()
         {
-            Catalogs = new ObservableCollection<Catalog>(MarketAPI.GetCatalog());
+            SubCatalogs = new ObservableCollection<SubCatalog>(MarketAPI.GetSubCatalog());
         }
 
         #region Commands
@@ -40,13 +41,7 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                string catalogName = obj as string;
-
-                                if (catalogName != string.Empty)
-                                {
-                                    Catalog catalog = new Catalog() { Name = catalogName };
-                                    ExecuteCommand(MarketAPI.AddCatalog, catalog);
-                                }
+                                
                             }
                         )
                     );
@@ -62,7 +57,7 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                ExecuteCommand(MarketAPI.UpdateCatalog, obj);
+                                // TODO: ExecuteCommand(MarketAPI.UpdateSubCatalog, obj);
                             }
                         )
                     );
@@ -77,10 +72,10 @@ namespace WpfAdminApp.ViewModels
                     (_removeCommand = new RelayCommand
                         (
                             obj =>
-                                {
-                                    ExecuteCommand(MarketAPI.DeleteCatalog, obj);
-                                },
-                            obj => Catalogs.Count > 0
+                            {
+                                // TODO: ExecuteCommand(MarketAPI.DeleteSubCatalog, obj);
+                            },
+                            obj => SubCatalogs.Count > 0
                         )
                     );
             }
@@ -88,15 +83,15 @@ namespace WpfAdminApp.ViewModels
 
         #endregion
 
-        private void ExecuteCommand(Func<Catalog, bool> apiMethod, object obj)
+        private void ExecuteCommand(Func<SubCatalog, bool> apiMethod, object obj)
         {
             if (obj != null)
             {
-                Catalog catalog = obj as Catalog;
-                bool response = apiMethod(catalog);
+                SubCatalog subCatalog = obj as SubCatalog;
+                bool response = apiMethod(subCatalog);
 
-                Catalogs.Clear();
-                MarketAPI.GetCatalog().ForEach(x => Catalogs.Add(x));
+                SubCatalogs.Clear();
+                MarketAPI.GetSubCatalog().ForEach(x => SubCatalogs.Add(x));
 
                 MessageBox.Show
                 (

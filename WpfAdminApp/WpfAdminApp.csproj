@@ -62,14 +62,19 @@
     <Compile Include="Converter.cs" />
     <Compile Include="Entities\LoginResponse.cs" />
     <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\SubCatalog.cs" />
     <Compile Include="MarketAPI.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModels\SubCatalogViewModel.cs" />
     <Compile Include="Views\CatalogView.xaml.cs">
       <DependentUpon>CatalogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubCatalogView.xaml.cs">
+      <DependentUpon>SubCatalogView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -90,6 +95,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProductsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubCatalogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

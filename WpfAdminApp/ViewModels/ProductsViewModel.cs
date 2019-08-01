@@ -8,7 +8,7 @@ using WpfAdminApp.Entities;
 
 namespace WpfAdminApp.ViewModels
 {
-    public class ProductsViewModel
+    public class ProductsViewModel : INotifyPropertyChanged
     {
         private Product _selectedProduct;
         private RelayCommand _addCommand, _removeCommand, _applyCommand, _chooseImageCommand;

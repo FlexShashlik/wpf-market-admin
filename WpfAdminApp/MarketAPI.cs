@@ -81,6 +81,17 @@ namespace WpfAdminApp
 
         #endregion
 
+        #region SubCatalog
+
+        public static List<SubCatalog> GetSubCatalog()
+        {
+            RestRequest request = new RestRequest("sub_catalog/", Method.GET);
+
+            return _client.Execute<List<SubCatalog>>(request).Data;
+        }
+
+        #endregion
+
         #region Product
 
         public static List<Product> GetProducts()

@@ -8,11 +8,15 @@
 
     <Window.Resources>
 
-        <DataTemplate x:Name="CatalogViewTemplate" DataType="{x:Type viewmodels:CatalogViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:CatalogViewModel}">
             <views:CatalogView DataContext="{Binding}" />
         </DataTemplate>
 
-        <DataTemplate x:Name="ProductsViewTemplate" DataType="{x:Type viewmodels:ProductsViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:SubCatalogViewModel}">
+            <views:SubCatalogView DataContext="{Binding}" />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:ProductsViewModel}">
             <views:ProductsView DataContext="{Binding}" />
         </DataTemplate>
 
@@ -55,6 +59,7 @@
 
         <StackPanel Name="PanelButtons" VerticalAlignment="Center">
             <Button Click="CatalogView_Click">Каталог</Button>
+            <Button Click="SubCatalogView_Click">Под-Каталог</Button>
             <Button Click="ProductsView_Click">Продукты</Button>
         </StackPanel>
 
