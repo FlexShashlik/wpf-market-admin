@@ -71,7 +71,7 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                // TODO: ExecuteCommand(MarketAPI.UpdateSubCatalog, obj);
+                                ExecuteCommand(MarketAPI.UpdateSubCatalog, obj);
                             }
                         )
                     );

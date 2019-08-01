@@ -104,6 +104,21 @@ namespace WpfAdminApp
             return response.StatusCode == System.Net.HttpStatusCode.Created;
         }
 
+        public static bool UpdateSubCatalog(SubCatalog subCatalog)
+        {
+            RestRequest request = new RestRequest("admin/sub_catalog/{id}", Method.PUT);
+            request.AddUrlSegment("id", subCatalog.ID);
+
+            request.AddParameter("name", subCatalog.Name);
+            request.AddParameter("catalog_id", subCatalog.CatalogID);
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            IRestResponse response = _client.Execute(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
         #endregion
 
         #region Product
