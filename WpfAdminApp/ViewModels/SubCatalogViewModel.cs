@@ -41,7 +41,21 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                
+                                var values = (object[])obj;
+                                string subCatalogName = values[0].ToString();
+                                string subCatalogCatalogID = values[1].ToString();
+
+                                if (subCatalogName != string.Empty &&
+                                    subCatalogCatalogID != string.Empty)
+                                {
+                                    SubCatalog subCatalog = new SubCatalog()
+                                    {
+                                        Name = subCatalogName,
+                                        CatalogID = int.Parse(subCatalogCatalogID)
+                                    };
+
+                                    ExecuteCommand(MarketAPI.AddSubCatalog, subCatalog);
+                                }
                             }
                         )
                     );

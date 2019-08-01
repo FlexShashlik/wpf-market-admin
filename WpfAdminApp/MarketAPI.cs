@@ -90,6 +90,20 @@ namespace WpfAdminApp
             return _client.Execute<List<SubCatalog>>(request).Data;
         }
 
+        public static bool AddSubCatalog(SubCatalog subCatalog)
+        {
+            RestRequest request = new RestRequest("admin/sub_catalog/", Method.POST);
+
+            request.AddParameter("name", subCatalog.Name);
+            request.AddParameter("catalog_id", subCatalog.CatalogID);
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            IRestResponse response = _client.Execute(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.Created;
+        }
+
         #endregion
 
         #region Product
