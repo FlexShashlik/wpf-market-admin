@@ -59,7 +59,7 @@
 
                 <Button.CommandParameter>
 
-                    <MultiBinding Converter="{StaticResource Converter}" ConverterParameter="">
+                    <MultiBinding Converter="{StaticResource Converter}">
                         <Binding Path="Text" ElementName="textBoxName" />
                         <Binding Path="Text" ElementName="textBoxCatalogID" />
                     </MultiBinding>
