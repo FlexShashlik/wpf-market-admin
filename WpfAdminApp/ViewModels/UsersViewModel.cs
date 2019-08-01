@@ -56,7 +56,7 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                // TODO: ExecuteCommand(MarketAPI.DeleteUser, obj);
+                                ExecuteCommand(MarketAPI.DeleteUser, obj);
                             },
                             obj => Users.Count > 0
                         )

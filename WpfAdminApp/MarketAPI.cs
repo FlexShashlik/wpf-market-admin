@@ -222,6 +222,18 @@ namespace WpfAdminApp
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
+        public static bool DeleteUser(User user)
+        {
+            RestRequest request = new RestRequest("admin/users/{id}", Method.DELETE);
+            request.AddUrlSegment("id", user.ID);
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            IRestResponse response = _client.Execute(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
         #endregion
     }
 }
