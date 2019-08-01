@@ -10,7 +10,7 @@ namespace WpfAdminApp.ViewModels
     public class UsersViewModel : INotifyPropertyChanged
     {
         private User _selectedUser;
-        private RelayCommand _addCommand, _removeCommand, _applyCommand;
+        private RelayCommand _removeCommand, _applyCommand;
 
         public ObservableCollection<User> Users { get; set; }
 
@@ -31,34 +31,6 @@ namespace WpfAdminApp.ViewModels
 
         #region Commands
 
-        public RelayCommand AddCommand
-        {
-            get
-            {
-                return _addCommand ??
-                    (_addCommand = new RelayCommand
-                        (
-                            obj =>
-                            {
-                                // TODO:
-                                //var values = (object[])obj;
-                                //string userFirstName = values[0].ToString();
-
-                                //if (userFirstName != string.Empty)
-                                //{
-                                //    User user = new User()
-                                //    {
-                                //        FirstName = userFirstName
-                                //    };
-
-                                //    ExecuteCommand(MarketAPI.AddUser, user);
-                                //}
-                            }
-                        )
-                    );
-            }
-        }
-
         public RelayCommand ApplyCommand
         {
             get
@@ -68,7 +40,7 @@ namespace WpfAdminApp.ViewModels
                         (
                             obj =>
                             {
-                                // TODO: ExecuteCommand(MarketAPI.UpdateUser, obj);
+                                ExecuteCommand(MarketAPI.UpdateUser, obj);
                             }
                         )
                     );

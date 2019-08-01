@@ -60,19 +60,6 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
 
-            <Button Command="{Binding AddCommand}"
-                    Content="Добавить">
-
-                <Button.CommandParameter>
-
-                    <MultiBinding Converter="{StaticResource Converter}">
-                        <Binding Path="Text" ElementName="textBoxEmail" />
-                    </MultiBinding>
-
-                </Button.CommandParameter>
-
-            </Button>
-
             <Button Command="{Binding RemoveCommand}"
                     CommandParameter="{Binding SelectedUser}">Удалить</Button>
 

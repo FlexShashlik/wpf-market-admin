@@ -205,6 +205,23 @@ namespace WpfAdminApp
             return _client.Execute<List<User>>(request).Data;
         }
 
+        public static bool UpdateUser(User user)
+        {
+            RestRequest request = new RestRequest("admin/users/{id}", Method.PUT);
+            request.AddUrlSegment("id", user.ID);
+
+            request.AddParameter("email", user.Email);
+            request.AddParameter("first_name", user.FirstName);
+            request.AddParameter("last_name", user.LastName);
+            request.AddParameter("role", user.Role);
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            IRestResponse response = _client.Execute(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
         #endregion
     }
 }
