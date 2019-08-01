@@ -20,6 +20,10 @@
             <views:ProductsView DataContext="{Binding}" />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewmodels:UsersViewModel}">
+            <views:UsersView DataContext="{Binding}" />
+        </DataTemplate>
+
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Margin" Value="5" />
@@ -38,7 +42,7 @@
         </Style>
 
         <Style TargetType="Button">
-            <Setter Property="Width" Value="80" />
+            <Setter Property="Width" Value="90" />
             <Setter Property="Height" Value="30" />
             <Setter Property="Margin" Value="5" />
         </Style>
@@ -61,6 +65,7 @@
             <Button Click="CatalogView_Click">Каталог</Button>
             <Button Click="SubCatalogView_Click">Под-Каталог</Button>
             <Button Click="ProductsView_Click">Продукты</Button>
+            <Button Click="UsersView_Click">Пользователи</Button>
         </StackPanel>
 
         <StackPanel Name="PanelLogin" Grid.Column="2" VerticalAlignment="Center">

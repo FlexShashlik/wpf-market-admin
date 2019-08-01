@@ -193,5 +193,18 @@ namespace WpfAdminApp
         }
 
         #endregion
+
+        #region User
+
+        public static List<User> GetUsers()
+        {
+            RestRequest request = new RestRequest("admin/users/", Method.GET);
+
+            request.AddHeader("Authorization", "Bearer " + Token);
+
+            return _client.Execute<List<User>>(request).Data;
+        }
+
+        #endregion
     }
 }

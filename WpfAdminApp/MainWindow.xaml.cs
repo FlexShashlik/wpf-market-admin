@@ -42,5 +42,10 @@ namespace WpfAdminApp
         {
             DataContext = new ProductsViewModel();
         }
+
+        private void UsersView_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new UsersViewModel();
+        }
     }
 }
