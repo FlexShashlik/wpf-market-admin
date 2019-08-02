@@ -107,7 +107,7 @@ namespace WpfAdminApp.ViewModels
                 SubCatalog subCatalog = obj as SubCatalog;
                 bool response = apiMethod(subCatalog);
 
-                SubCatalogs.Clear();
+                SubCatalogs?.Clear();
                 MarketAPI.GetSubCatalog(out List<SubCatalog> subCatalogs, out bool result);
 
                 if (result && subCatalogs != null)

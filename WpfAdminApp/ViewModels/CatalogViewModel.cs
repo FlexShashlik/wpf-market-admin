@@ -99,7 +99,7 @@ namespace WpfAdminApp.ViewModels
                 Catalog catalog = obj as Catalog;
                 bool response = apiMethod(catalog);
 
-                Catalogs.Clear();
+                Catalogs?.Clear();
                 MarketAPI.GetCatalog(out List<Catalog> catalogs, out bool result);
 
                 if (result && catalogs != null)

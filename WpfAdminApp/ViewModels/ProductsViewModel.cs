@@ -150,10 +150,10 @@ namespace WpfAdminApp.ViewModels
                 Product product = obj as Product;
                 bool response = apiMethod(product);
 
-                Products.Clear();
+                Products?.Clear();
                 MarketAPI.GetProducts(out List<Product> products, out bool result);
 
-                if (result && product != null)
+                if (result && products != null)
                     products.ForEach(x => Products.Add(x));
 
                 MessageBox.Show

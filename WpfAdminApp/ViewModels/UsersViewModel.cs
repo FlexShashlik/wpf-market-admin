@@ -77,7 +77,7 @@ namespace WpfAdminApp.ViewModels
                 User user = obj as User;
                 bool response = apiMethod(user);
 
-                Users.Clear();
+                Users?.Clear();
                 MarketAPI.GetUsers(out List<User> users, out bool result);
 
                 if (result && users != null)
