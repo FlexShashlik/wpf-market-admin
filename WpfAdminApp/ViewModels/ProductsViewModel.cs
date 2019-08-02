@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -30,7 +31,10 @@ namespace WpfAdminApp.ViewModels
 
         public ProductsViewModel()
         {
-            Products = new ObservableCollection<Product>(MarketAPI.GetProducts());
+            MarketAPI.GetProducts(out List<Product> products, out bool result);
+
+            if (result && products != null)
+                Products = new ObservableCollection<Product>(products);
         }
 
         #region Commands
@@ -104,7 +108,7 @@ namespace WpfAdminApp.ViewModels
                             {
                                 ExecuteCommand(MarketAPI.DeleteProduct, obj);
                             },
-                            obj => Products.Count > 0
+                            obj => Products?.Count > 0
                         )
                     );
             }
@@ -147,7 +151,10 @@ namespace WpfAdminApp.ViewModels
                 bool response = apiMethod(product);
 
                 Products.Clear();
-                MarketAPI.GetProducts().ForEach(x => Products.Add(x));
+                MarketAPI.GetProducts(out List<Product> products, out bool result);
+
+                if (result && product != null)
+                    products.ForEach(x => Products.Add(x));
 
                 MessageBox.Show
                 (

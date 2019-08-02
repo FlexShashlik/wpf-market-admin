@@ -8,7 +8,7 @@ namespace WpfAdminApp
     public static class MarketAPI
     {
         public static string Token { get; set; }
-        public const string SERVER = "http://192.168.1.162/";
+        public const string SERVER = "http://127.0.0.1/";
         private static RestClient _client = new RestClient(SERVER + "api/v1/");
 
 
@@ -135,11 +135,15 @@ namespace WpfAdminApp
 
         #region Product
 
-        public static List<Product> GetProducts()
+        public static void GetProducts(out List<Product> data, out bool result)
         {
             RestRequest request = new RestRequest("products/", Method.GET);
 
-            return _client.Execute<List<Product>>(request).Data;
+            IRestResponse<List<Product>> response = _client.Execute<List<Product>>(request);
+
+            result = response.StatusCode == System.Net.HttpStatusCode.OK;
+
+            data = response.Data;
         }
 
         public static bool AddProduct(Product product)
