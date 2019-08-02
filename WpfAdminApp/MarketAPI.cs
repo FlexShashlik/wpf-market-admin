@@ -200,13 +200,17 @@ namespace WpfAdminApp
 
         #region User
 
-        public static List<User> GetUsers()
+        public static void GetUsers(out List<User> data, out bool result)
         {
             RestRequest request = new RestRequest("admin/users/", Method.GET);
 
             request.AddHeader("Authorization", "Bearer " + Token);
 
-            return _client.Execute<List<User>>(request).Data;
+            IRestResponse<List<User>> response = _client.Execute<List<User>>(request);
+
+            result = response.StatusCode == System.Net.HttpStatusCode.OK;
+
+            data = response.Data;
         }
 
         public static bool UpdateUser(User user)

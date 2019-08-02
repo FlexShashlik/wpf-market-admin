@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -26,7 +27,10 @@ namespace WpfAdminApp.ViewModels
 
         public UsersViewModel()
         {
-            Users = new ObservableCollection<User>(MarketAPI.GetUsers());
+            MarketAPI.GetUsers(out List<User> users, out bool result);
+
+            if (result && users != null)
+                Users = new ObservableCollection<User>(users);
         }
 
         #region Commands
@@ -58,7 +62,7 @@ namespace WpfAdminApp.ViewModels
                             {
                                 ExecuteCommand(MarketAPI.DeleteUser, obj);
                             },
-                            obj => Users.Count > 0
+                            obj => Users?.Count > 0
                         )
                     );
             }
@@ -74,7 +78,10 @@ namespace WpfAdminApp.ViewModels
                 bool response = apiMethod(user);
 
                 Users.Clear();
-                MarketAPI.GetUsers().ForEach(x => Users.Add(x));
+                MarketAPI.GetUsers(out List<User> users, out bool result);
+
+                if (result && users != null)
+                    users.ForEach(x => Users.Add(x));
 
                 MessageBox.Show
                 (
