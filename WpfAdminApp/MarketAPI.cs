@@ -35,11 +35,15 @@ namespace WpfAdminApp
 
         #region Catalog
 
-        public static List<Catalog> GetCatalog()
+        public static void GetCatalog(out List<Catalog> data, out bool result)
         {
             RestRequest request = new RestRequest("catalog/", Method.GET);
 
-            return _client.Execute<List<Catalog>>(request).Data;
+            IRestResponse<List<Catalog>> response = _client.Execute<List<Catalog>>(request);
+
+            result = response.StatusCode == System.Net.HttpStatusCode.OK;
+
+            data = response.Data;
         }
 
         public static bool AddCatalog(Catalog catalog)
