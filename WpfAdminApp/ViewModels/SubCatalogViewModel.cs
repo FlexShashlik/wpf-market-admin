@@ -1,5 +1,5 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -27,7 +27,10 @@ namespace WpfAdminApp.ViewModels
 
         public SubCatalogViewModel()
         {
-            SubCatalogs = new ObservableCollection<SubCatalog>(MarketAPI.GetSubCatalog());
+            MarketAPI.GetSubCatalog(out List<SubCatalog> subCatalogs, out bool result);
+
+            if (result && subCatalogs != null)
+                SubCatalogs = new ObservableCollection<SubCatalog>(subCatalogs);
         }
 
         #region Commands
@@ -89,7 +92,7 @@ namespace WpfAdminApp.ViewModels
                             {
                                 ExecuteCommand(MarketAPI.DeleteSubCatalog, obj);
                             },
-                            obj => SubCatalogs.Count > 0
+                            obj => SubCatalogs?.Count > 0
                         )
                     );
             }
@@ -105,7 +108,10 @@ namespace WpfAdminApp.ViewModels
                 bool response = apiMethod(subCatalog);
 
                 SubCatalogs.Clear();
-                MarketAPI.GetSubCatalog().ForEach(x => SubCatalogs.Add(x));
+                MarketAPI.GetSubCatalog(out List<SubCatalog> subCatalogs, out bool result);
+
+                if (result && subCatalogs != null)
+                    subCatalogs.ForEach(x => SubCatalogs.Add(x));
 
                 MessageBox.Show
                 (

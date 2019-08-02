@@ -87,11 +87,15 @@ namespace WpfAdminApp
 
         #region SubCatalog
 
-        public static List<SubCatalog> GetSubCatalog()
+        public static void GetSubCatalog(out List<SubCatalog> data, out bool result)
         {
             RestRequest request = new RestRequest("sub_catalog/", Method.GET);
 
-            return _client.Execute<List<SubCatalog>>(request).Data;
+            IRestResponse<List<SubCatalog>> response = _client.Execute<List<SubCatalog>>(request);
+
+            result = response.StatusCode == System.Net.HttpStatusCode.OK;
+
+            data = response.Data;
         }
 
         public static bool AddSubCatalog(SubCatalog subCatalog)
