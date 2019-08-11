@@ -4,7 +4,13 @@ This is the <b>administration part</b> of my market app project. I attempted to 
 
 <hr>
 
-### Used libs:
+## Other parts of my project:
+- [Server](https://github.com/SevadaSahakyan/go-market-server)
+- [Client](https://github.com/SevadaSahakyan/android-market-client)
+
+<hr>
+
+## Used libs:
 - [RestSharp](https://github.com/restsharp/RestSharp)
 
 <hr>
